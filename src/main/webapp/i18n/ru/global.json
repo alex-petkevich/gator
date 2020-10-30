@@ -6,7 +6,13 @@
       "home": "Главная",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Сущности",
+        "main": "Настройки",
+        "item": "Записи",
+        "category": "Категории",
+        "properties": "Пользовательские настройки",
+        "site": "Сайты",
+        "userProperties": "Настройки пользователя",
+        "userSites": "Сайты пользователя",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -29,6 +35,7 @@
         "audits": "Аудит",
         "apidocs": "API",
         "database": "База данных",
+        "reindexer": "Переиндексация ElasticSearch",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "language": "Язык"
@@ -131,5 +138,5 @@
     "idexists": "Новый {{entityName}} не может иметь данный ID",
     "idnull": "Неверный ID"
   },
-  "footer": "Это ваш футтер"
+  "footer": "developed by homesite.by (c)"
 }

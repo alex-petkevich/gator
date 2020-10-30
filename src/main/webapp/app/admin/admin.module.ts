@@ -11,6 +11,8 @@ import { JhiHealthModalComponent } from './health/health-modal.component';
 import { JhiHealthCheckComponent } from './health/health.component';
 import { JhiConfigurationComponent } from './configuration/configuration.component';
 import { JhiDocsComponent } from './docs/docs.component';
+import { ElasticsearchReindexComponent } from './elasticsearch-reindex/elasticsearch-reindex.component';
+import { ElasticsearchReindexModalComponent } from './elasticsearch-reindex/elasticsearch-reindex-modal.component';
 
 @NgModule({
   imports: [
@@ -25,8 +27,10 @@ import { JhiDocsComponent } from './docs/docs.component';
     JhiHealthCheckComponent,
     JhiHealthModalComponent,
     JhiDocsComponent,
-    JhiMetricsMonitoringComponent
+    JhiMetricsMonitoringComponent,
+    ElasticsearchReindexComponent,
+    ElasticsearchReindexModalComponent
   ],
-  entryComponents: [JhiHealthModalComponent]
+  entryComponents: [JhiHealthModalComponent, ElasticsearchReindexModalComponent]
 })
 export class GatorAdminModule {}

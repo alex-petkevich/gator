@@ -23,7 +23,7 @@ module.exports = (options) => ({
                 test: /\.html$/,
                 loader: 'html-loader',
                 options: {
-                    minimize: true,
+                    minimize: false,
                     caseSensitive: true,
                     removeAttributeQuotes:false,
                     minifyJS:false,

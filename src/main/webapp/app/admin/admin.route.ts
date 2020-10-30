@@ -6,10 +6,11 @@ import { docsRoute } from './docs/docs.route';
 import { healthRoute } from './health/health.route';
 import { logsRoute } from './logs/logs.route';
 import { metricsRoute } from './metrics/metrics.route';
+import { elasticsearchReindexRoute } from './elasticsearch-reindex/elasticsearch-reindex.route';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 
-const ADMIN_ROUTES = [auditsRoute, configurationRoute, docsRoute, healthRoute, logsRoute, metricsRoute];
+const ADMIN_ROUTES = [auditsRoute, configurationRoute, docsRoute, healthRoute, logsRoute, metricsRoute, elasticsearchReindexRoute];
 
 export const adminState: Routes = [
   {

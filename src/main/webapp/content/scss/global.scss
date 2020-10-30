@@ -164,3 +164,13 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+input[type='radio'],
+input[type='checkbox'] {
+  display: inline-block;
+  width: 40px;
+}
+
+.vs {
+  height: 100%;
+}
