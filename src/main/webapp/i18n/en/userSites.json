@@ -1,0 +1,22 @@
+{
+  "gatorApp": {
+    "userSites": {
+      "home": {
+        "title": "User Sites",
+        "createLabel": "Create a new User Sites",
+        "createOrEditLabel": "Create or edit a User Sites",
+        "notFound": "No User Sites found"
+      },
+      "created": "A new User Sites is created with identifier {{ param }}",
+      "updated": "A User Sites is updated with identifier {{ param }}",
+      "deleted": "A User Sites is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Sites {{ id }}?"
+      },
+      "detail": {
+        "title": "User Sites"
+      },
+      "user": "User"
+    }
+  }
+}

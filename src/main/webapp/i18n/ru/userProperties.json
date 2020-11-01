@@ -1,0 +1,23 @@
+{
+  "gatorApp": {
+    "userProperties": {
+      "home": {
+        "title": "User Properties",
+        "createLabel": "Создать новый User Properties",
+        "createOrEditLabel": "Создать или отредактировать User Properties",
+        "notFound": "No User Properties found"
+      },
+      "created": "Новый User Properties создан с идентификатором {{ param }}",
+      "updated": "User Properties обновлен с идентификатором {{ param }}",
+      "deleted": "User Properties удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить User Properties {{ id }}?"
+      },
+      "detail": {
+        "title": "User Properties"
+      },
+      "value": "Value",
+      "user": "User"
+    }
+  }
+}

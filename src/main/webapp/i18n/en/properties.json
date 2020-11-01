@@ -1,0 +1,23 @@
+{
+  "gatorApp": {
+    "properties": {
+      "home": {
+        "title": "Properties",
+        "createLabel": "Create a new Properties",
+        "createOrEditLabel": "Create or edit a Properties",
+        "notFound": "No Properties found"
+      },
+      "created": "A new Properties is created with identifier {{ param }}",
+      "updated": "A Properties is updated with identifier {{ param }}",
+      "deleted": "A Properties is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Properties {{ id }}?"
+      },
+      "detail": {
+        "title": "Properties"
+      },
+      "name": "Name",
+      "isActive": "Is Active"
+    }
+  }
+}

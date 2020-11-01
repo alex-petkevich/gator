@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="item">
+            <h2><span jhiTranslate="gatorApp.item.detail.title">Item</span> {{item.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatorApp.item.title">Title</span></dt>
+                <dd>
+                    <span>{{item.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.description">Description</span></dt>
+                <dd>
+                    <span>{{item.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.price">Price</span></dt>
+                <dd>
+                    <span>{{item.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.link">Link</span></dt>
+                <dd>
+                    <span>{{item.link}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.ownerName">Owner Name</span></dt>
+                <dd>
+                    <span>{{item.ownerName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.ownerLink">Owner Link</span></dt>
+                <dd>
+                    <span>{{item.ownerLink}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.image">Image</span></dt>
+                <dd>
+                    <span>{{item.image}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.active">Active</span></dt>
+                <dd>
+                    <span>{{item.active}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{item.createdAt}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.updatedAt">Updated At</span></dt>
+                <dd>
+                    <span>{{item.updatedAt}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.deletedAt">Deleted At</span></dt>
+                <dd>
+                    <span>{{item.deletedAt}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatorApp.item.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="item.categoryId">
+                        <a [routerLink]="['/category', item.categoryId, 'view']">{{item.categoryName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/item', item.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
