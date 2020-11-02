@@ -18,6 +18,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="gatorApp.site.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatorApp.site.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="url"><span jhiTranslate="gatorApp.site.url">Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="active"><span jhiTranslate="gatorApp.site.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -28,6 +29,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let site of sites ;trackBy: trackId">
                 <td><a [routerLink]="['/site', site.id, 'view' ]">{{site.id}}</a></td>
+                <td>{{site.name}}</td>
                 <td>{{site.title}}</td>
                 <td>{{site.url}}</td>
                 <td>{{site.active}}</td>

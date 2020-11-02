@@ -23,6 +23,7 @@ export class SiteUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.maxLength(255)]],
     title: [null, [Validators.maxLength(255)]],
     url: [null, [Validators.maxLength(255)]],
     active: [],
@@ -54,6 +55,7 @@ export class SiteUpdateComponent implements OnInit {
   updateForm(site: ISite) {
     this.editForm.patchValue({
       id: site.id,
+      name: site.name,
       title: site.title,
       url: site.url,
       active: site.active,
@@ -79,6 +81,7 @@ export class SiteUpdateComponent implements OnInit {
     return {
       ...new Site(),
       id: this.editForm.get(['id']).value,
+      name: this.editForm.get(['name']).value,
       title: this.editForm.get(['title']).value,
       url: this.editForm.get(['url']).value,
       active: this.editForm.get(['active']).value,

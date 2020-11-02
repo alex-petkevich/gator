@@ -16,6 +16,7 @@
       "detail": {
         "title": "Site"
       },
+      "name": "Name",
       "title": "Title",
       "url": "Url",
       "active": "Active",
