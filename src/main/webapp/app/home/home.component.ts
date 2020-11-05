@@ -12,6 +12,7 @@ import { IItem } from 'app/shared/model/item.model';
 import { ITEMS_TO_DISPLAY } from 'app/shared/constants/pagination.constants';
 
 import { ItemService } from 'app/entities/item/item.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-home',
@@ -25,19 +26,39 @@ export class HomeComponent implements OnInit, OnDestroy {
   items: IItem[];
   predicate: any;
   eventSubscriber: Subscription;
+  currentSearch: string;
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private itemService: ItemService,
     protected jhiAlertService: JhiAlertService,
+    protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager
   ) {
     this.items = [];
     this.predicate = 'id';
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
   }
 
   loadAll() {
+    if (this.currentSearch) {
+      this.itemService
+        .searchAll({
+          query: this.currentSearch,
+          page: 0,
+          size: ITEMS_TO_DISPLAY,
+          sort: this.sort()
+        })
+        .subscribe(
+          (res: HttpResponse<IItem[]>) => this.displayItems(res.body, res.headers),
+          (res: HttpErrorResponse) => this.onError(res.message)
+        );
+      return;
+    }
     this.itemService
       .searchAll({
         query: '*',
@@ -104,6 +125,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   sort() {
     const result = ['updatedAt,desc'];
     return result;
+  }
+
+  clear() {
+    this.items = [];
+    this.predicate = 'id';
+    this.currentSearch = '';
+    this.loadAll();
+  }
+
+  search(query) {
+    if (!query) {
+      return this.clear();
+    }
+    this.items = [];
+    this.predicate = '_score';
+    this.currentSearch = query;
+    this.loadAll();
   }
 
   protected displayItems(data: IItem[], headers: HttpHeaders) {

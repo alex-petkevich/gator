@@ -1,4 +1,20 @@
 <div class="row">
+    <div class="col-sm-12">
+        <form name="searchForm" class="form-inline">
+            <div class="input-group w-100 mt-3">
+                <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatorApp.item.home.search' | translate }}">
+                <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div class="row">
     <div class="col-md-12">
 
         <div class="alert alert-warning" *ngIf="items?.length === 0">
@@ -9,7 +25,7 @@
             <table class="table table-striped" aria-describedby="page-heading">
                 <tbody>
                 <tr *ngFor="let item of items ;trackBy: trackId">
-                    <td><a href="{{item.link}}">{{item.title}}</a> <span class="price" *ngIf="item?.price != ''">({{item.price}} p.)</span> - {{item.updatedAt | date:'dd/MM/yyyy hh:mm:ss'}} <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
+                    <td width="50" *ngIf="item?.image != null"><img src="{{item.image}}" /></td><td><a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
                 </tr>
                 </tbody>
             </table>
