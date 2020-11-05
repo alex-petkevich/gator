@@ -9,7 +9,7 @@
             <table class="table table-striped" aria-describedby="page-heading">
                 <tbody>
                 <tr *ngFor="let item of items ;trackBy: trackId">
-                    <td><a href="{{item.link}}">{{item.title}}</a> ({{item.price}}) - {{item.updatedAt | date:'dd/MM/yyyy hh:mm:ss'}} <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
+                    <td><a href="{{item.link}}">{{item.title}}</a> <span class="price" *ngIf="item?.price != ''">({{item.price}} p.)</span> - {{item.updatedAt | date:'dd/MM/yyyy hh:mm:ss'}} <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
                 </tr>
                 </tbody>
             </table>
