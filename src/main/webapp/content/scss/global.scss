@@ -190,3 +190,38 @@ input[type='checkbox'] {
   font-size: 0.75rem;
   font-weight: bold;
 }
+.lbl {
+  display: inline;
+  font-size: 0.6rem;
+}
+.buy {
+  background-color: red;
+  color: white;
+}
+.sell {
+  background-color: green;
+  color: white;
+}
+.change {
+  background-color: #0f6ab4;
+  color: white;
+}
+.service {
+  background-color: cyan;
+  color: black;
+}
+.rent {
+  background-color: #0088bb;
+  color: white;
+}
+.important {
+  background-color: #880000;
+  color: white;
+}
+.closed {
+  background-color: #888888;
+  color: white;
+}
+.adrow > a {
+  color: #2b6ea1;
+}

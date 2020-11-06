@@ -21,6 +21,17 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatorApp.item.type" for="field_ownerName">Type</label>
+                    <select class="form-control" id="field_type" name="type" formControlName="type">
+                        <option value="null"></option>
+                        <option value="0" ng-selected="item.type == '0'">Sell</option>
+                        <option value="1" ng-selected="item.type == '1'">Buy</option>
+                        <option value="2" ng-selected="item.type == '2'">Change</option>
+                        <option value="3" ng-selected="item.type == '3'">Service</option>
+                        <option value="4" ng-selected="item.type == '4'">Rent</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatorApp.item.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>

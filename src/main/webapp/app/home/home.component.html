@@ -25,7 +25,17 @@
             <table class="table table-striped" aria-describedby="page-heading">
                 <tbody>
                 <tr *ngFor="let item of items ;trackBy: trackId">
-                    <td width="50" *ngIf="item?.image != null"><img src="{{item.image}}" /></td><td><a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
+                    <td width="50" *ngIf="item?.image != null">
+                        <img src="{{item.image}}" /></td>
+                    <td class="adrow">
+                        <div class="lbl buy"*ngIf="item?.type == '0'">buy</div>
+                        <div class="lbl sell"*ngIf="item?.type == '1'">sell</div>
+                        <div class="lbl change"*ngIf="item?.type == '2'">change</div>
+                        <div class="lbl service"*ngIf="item?.type == '3'">service</div>
+                        <div class="lbl rent"*ngIf="item?.type == '4'">rent</div>
+                        <div class="lbl important"*ngIf="item?.type == '5'">important</div>
+                        <div class="lbl xclosed"*ngIf="item?.type == '6'">closed</div>
+                        <a href="{{item.link}}" ngbTooltip="{{item.description}}" >{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
                 </tr>
                 </tbody>
             </table>

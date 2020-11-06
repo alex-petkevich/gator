@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 
 export interface IItem {
   id?: number;
+  type?: number;
   title?: string;
   description?: string;
   price?: number;
@@ -20,6 +21,7 @@ export interface IItem {
 export class Item implements IItem {
   constructor(
     public id?: number,
+    public type?: number,
     public title?: string,
     public description?: string,
     public price?: number,
