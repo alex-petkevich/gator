@@ -13,6 +13,8 @@ import { ITEMS_TO_DISPLAY } from 'app/shared/constants/pagination.constants';
 
 import { ItemService } from 'app/entities/item/item.service';
 import { ActivatedRoute } from '@angular/router';
+import { ICategory } from 'app/shared/model/category.model';
+import { CategoryService } from 'app/entities/category/category.service';
 
 @Component({
   selector: 'jhi-home',
@@ -27,21 +29,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   predicate: any;
   eventSubscriber: Subscription;
   currentSearch: string;
+  searchTimeToRefresh: number;
+  searchCategory: string;
+  categories: ICategory[];
+  interval: NodeJS.Timeout;
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private itemService: ItemService,
+    private categoryService: CategoryService,
     protected jhiAlertService: JhiAlertService,
     protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager
   ) {
     this.items = [];
     this.predicate = 'id';
+    this.categories = [];
     this.currentSearch =
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
         ? this.activatedRoute.snapshot.queryParams['search']
         : '';
+    this.searchTimeToRefresh = 3;
+    this.searchCategory = '0';
   }
 
   loadAll() {
@@ -49,6 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.itemService
         .searchAll({
           query: this.currentSearch,
+          category: this.searchCategory,
           page: 0,
           size: ITEMS_TO_DISPLAY,
           sort: this.sort()
@@ -62,6 +73,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.itemService
       .searchAll({
         query: '*',
+        category: this.searchCategory,
         page: 0,
         size: ITEMS_TO_DISPLAY,
         sort: this.sort()
@@ -72,6 +84,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
   }
 
+  loadCats() {
+    this.categoryService
+      .query({
+        size: 1000,
+        page: 0
+      })
+      .subscribe((res: HttpResponse<ICategory[]>) => this.displayCategories(res.body, res.headers));
+  }
+
   reset() {
     this.items = [];
     this.loadAll();
@@ -79,10 +100,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadPage(page) {
     this.loadAll();
+    this.loadCats();
   }
 
   ngOnInit() {
     this.loadAll();
+    this.loadCats();
     this.accountService.identity().then((account: Account) => {
       this.account = account;
     });
@@ -153,8 +176,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   protected refreshContent() {
-    setInterval(() => {
+    if (this.interval) clearInterval(this.interval);
+    this.interval = setInterval(() => {
       this.loadAll();
-    }, 3000);
+    }, this.searchTimeToRefresh * 1000);
+  }
+
+  protected displayCategories(data: ICategory[], headers: HttpHeaders) {
+    this.categories = data;
   }
 }
