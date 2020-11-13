@@ -138,5 +138,5 @@
     "idexists": "Новый {{entityName}} не может иметь данный ID",
     "idnull": "Неверный ID"
   },
-  "footer": "developed by homesite.by (c)"
+  "footer": "developed by <a href='http://homesite.by'>http://homesite.by</a> (c)"
 }
