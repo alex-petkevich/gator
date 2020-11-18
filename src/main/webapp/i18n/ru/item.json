@@ -8,7 +8,13 @@
         "search": "Найти запись",
         "notFound": "Записи не найдены",
         "searchCategory": "Категория",
-        "searchTimeToRefresh": "Обновление, секунд"
+        "searchTimeToRefresh": "Обновление, секунд",
+        "searchType": "Тип",
+        "buy": "Продажа",
+        "sell": "Покупка",
+        "change": "Обмен",
+        "service": "Сервис",
+        "rent": "Аренда"
       },
       "created": "Новая запись создана с идентификатором {{ param }}",
       "updated": "Запись с идентификатором {{ param }} обновлена",

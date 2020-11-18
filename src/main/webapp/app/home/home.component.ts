@@ -19,7 +19,8 @@ import { CategoryService } from 'app/entities/category/category.service';
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
-  styleUrls: ['home.scss']
+  styleUrls: ['home.scss'],
+  animations: []
 })
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account;
@@ -30,9 +31,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   eventSubscriber: Subscription;
   currentSearch: string;
   searchTimeToRefresh: number;
+  searchType: number;
   searchCategory: string;
   categories: ICategory[];
   interval: NodeJS.Timeout;
+  isHidden: boolean;
 
   constructor(
     private accountService: AccountService,
@@ -52,6 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         : '';
     this.searchTimeToRefresh = 3;
     this.searchCategory = '0';
+    this.searchType = undefined;
+    this.isHidden = true;
   }
 
   loadAll() {
@@ -60,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .searchAll({
           query: this.currentSearch,
           category: this.searchCategory,
+          type: this.searchType,
           page: 0,
           size: ITEMS_TO_DISPLAY,
           sort: this.sort()
@@ -74,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .searchAll({
         query: '*',
         category: this.searchCategory,
+        type: this.searchType,
         page: 0,
         size: ITEMS_TO_DISPLAY,
         sort: this.sort()
@@ -167,19 +174,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
+  refreshContent() {
+    if (this.interval) clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      this.loadAll();
+    }, this.searchTimeToRefresh * 1000);
+  }
+
+  showHideFilters() {
+    this.isHidden = !this.isHidden;
+  }
+
   protected displayItems(data: IItem[], headers: HttpHeaders) {
     this.items = data;
   }
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  protected refreshContent() {
-    if (this.interval) clearInterval(this.interval);
-    this.interval = setInterval(() => {
-      this.loadAll();
-    }, this.searchTimeToRefresh * 1000);
   }
 
   protected displayCategories(data: ICategory[], headers: HttpHeaders) {

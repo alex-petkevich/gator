@@ -26,17 +26,20 @@ describe('Service Tests', () => {
 
       elemDefault = new Item(
         0,
+        1,
         'AAAAAAA',
-        'AAAAAAA',
+        '22222',
         0,
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
-        'AAAAAAA',
+        'false',
         false,
         currentDate,
         currentDate,
-        currentDate
+        currentDate,
+        'AAAAA',
+        1
       );
     });
 

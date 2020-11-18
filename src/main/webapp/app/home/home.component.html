@@ -1,4 +1,7 @@
-<div class="row">
+<button class="input-group-append btn btn-info" (click)="showHideFilters()">
+    <fa-icon [icon]="'search'"></fa-icon>&nbsp;&nbsp;&nbsp;Filters
+</button>
+<div class="row" *ngIf="!isHidden">
     <div class="col-sm-12">
         <form name="searchForm" class="form-inline">
             <div class="input-group w-100 mt-3">
@@ -7,7 +10,17 @@
                     <option value="0"></option>
                     <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
                 </select>
-                &nbsp;&nbsp;&nbsp;
+                &nbsp;
+                <label for="searchType">{{ 'gatorApp.item.home.searchType' | translate }}:</label> &nbsp;&nbsp;&nbsp;
+                <select name="searchType" class="form-control" id="searchType" [(ngModel)]="searchType"  (change)="loadAll()">
+                    <option></option>
+                    <option value="0">{{ 'gatorApp.item.home.buy' | translate }}</option>
+                    <option value="1">{{ 'gatorApp.item.home.sell' | translate }}</option>
+                    <option value="2">{{ 'gatorApp.item.home.change' | translate }}</option>
+                    <option value="3">{{ 'gatorApp.item.home.service' | translate }}</option>
+                    <option value="4">{{ 'gatorApp.item.home.rent' | translate }}</option>
+                </select>
+                &nbsp;
                 <label for="searchTimeToRefresh">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}:</label> &nbsp;&nbsp;&nbsp;
                 <select name="searchTimeToRefresh" class="form-control" id="searchTimeToRefresh" [(ngModel)]="searchTimeToRefresh"  (change)="refreshContent()">
                     <option value="3">3</option>
@@ -45,11 +58,11 @@
                     <td width="50" *ngIf="item?.image != null">
                         <img src="{{item.image}}" /></td>
                     <td >
-                        <div class="lbl buy"*ngIf="item?.type == '0'">buy</div>
-                        <div class="lbl sell"*ngIf="item?.type == '1'">sell</div>
-                        <div class="lbl change"*ngIf="item?.type == '2'">change</div>
-                        <div class="lbl service"*ngIf="item?.type == '3'">service</div>
-                        <div class="lbl rent"*ngIf="item?.type == '4'">rent</div>
+                        <div class="lbl sell"*ngIf="item?.type == '1'">{{ 'gatorApp.item.home.sell' | translate }}</div>
+                        <div class="lbl buy"*ngIf="item?.type == '0'">{{ 'gatorApp.item.home.buy' | translate }}</div>
+                        <div class="lbl change"*ngIf="item?.type == '2'">{{ 'gatorApp.item.home.change' | translate }}</div>
+                        <div class="lbl service"*ngIf="item?.type == '3'">{{ 'gatorApp.item.home.service' | translate }}</div>
+                        <div class="lbl rent"*ngIf="item?.type == '4'">{{ 'gatorApp.item.home.rent' | translate }}</div>
                         <div class="lbl important"*ngIf="item?.type == '5'">important</div>
                         <div class="lbl xclosed"*ngIf="item?.type == '6'">closed</div>
                         <a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>

@@ -11,6 +11,7 @@
     },
     "like": "If you like Gator, don't forget to give us a star on",
     "github": "GitHub",
-    "searchCategory": "Category"
+    "searchCategory": "Category",
+    "searchType": "Type"
   }
 }

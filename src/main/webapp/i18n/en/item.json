@@ -8,7 +8,13 @@
         "search": "Search for Item",
         "notFound": "No Items found",
         "searchCategory": "Category",
-        "searchTimeToRefresh": "Refresh, sec"
+        "searchTimeToRefresh": "Refresh, sec",
+        "searchType": "Type",
+        "buy": "Sale",
+        "sell": "Buy",
+        "change": "Exchange",
+        "service": "Service",
+        "rent": "Rent"
       },
       "created": "A new Item is created with identifier {{ param }}",
       "updated": "A Item is updated with identifier {{ param }}",
