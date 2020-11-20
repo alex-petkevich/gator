@@ -60,7 +60,7 @@
                 <tr *ngFor="let item of items ;trackBy: trackId">
                     <td width="50" *ngIf="item?.image != null">
                         <img src="{{item.image}}" /></td>
-                    <td >
+                    <td>
                         <div class="lbl sell"*ngIf="item?.type == '1'">{{ 'gatorApp.item.home.sell' | translate }}</div>
                         <div class="lbl buy"*ngIf="item?.type == '0'">{{ 'gatorApp.item.home.buy' | translate }}</div>
                         <div class="lbl change"*ngIf="item?.type == '2'">{{ 'gatorApp.item.home.change' | translate }}</div>
@@ -68,7 +68,7 @@
                         <div class="lbl rent"*ngIf="item?.type == '4'">{{ 'gatorApp.item.home.rent' | translate }}</div>
                         <div class="lbl important"*ngIf="item?.type == '5'">important</div>
                         <div class="lbl xclosed"*ngIf="item?.type == '6'">closed</div>
-                        <a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
+                        <a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd.MM.yyyy HH:mm'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
                 </tr>
                 </tbody>
             </table>

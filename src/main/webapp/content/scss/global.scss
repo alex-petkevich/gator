@@ -41,8 +41,7 @@ Generic styles
 /* other generic styles */
 
 .jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
+  padding: 0.5%;
   border: none;
 }
 
@@ -184,11 +183,11 @@ input[type='checkbox'] {
 .price {
   display: inline;
   font-size: 0.75rem;
+  font-weight: bold;
 }
 .date {
   display: inline;
   font-size: 0.75rem;
-  font-weight: bold;
 }
 .lbl {
   display: inline;
