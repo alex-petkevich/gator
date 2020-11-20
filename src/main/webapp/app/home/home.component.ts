@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
         ? this.activatedRoute.snapshot.queryParams['search']
         : '';
-    this.searchTimeToRefresh = 3;
+    this.searchTimeToRefresh = 6;
     this.searchCategory = '0';
     this.searchType = undefined;
     this.isHidden = true;
