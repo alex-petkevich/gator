@@ -14,7 +14,8 @@
         "sell": "Buy",
         "change": "Exchange",
         "service": "Service",
-        "rent": "Rent"
+        "rent": "Rent",
+        "showRate": "Convert price to "
       },
       "created": "A new Item is created with identifier {{ param }}",
       "updated": "A Item is updated with identifier {{ param }}",

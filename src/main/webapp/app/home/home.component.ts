@@ -15,6 +15,8 @@ import { ItemService } from 'app/entities/item/item.service';
 import { ActivatedRoute } from '@angular/router';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category/category.service';
+import { RateService } from 'app/entities/rate/rate.service';
+import { IRate } from 'app/shared/model/rate.model';
 
 @Component({
   selector: 'jhi-home',
@@ -36,12 +38,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories: ICategory[];
   interval: NodeJS.Timeout;
   isHidden: boolean;
+  private rates: IRate[];
 
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private itemService: ItemService,
     private categoryService: CategoryService,
+    private rateService: RateService,
     protected jhiAlertService: JhiAlertService,
     protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager
@@ -49,6 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.items = [];
     this.predicate = 'id';
     this.categories = [];
+    this.rates = [];
     this.currentSearch =
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
         ? this.activatedRoute.snapshot.queryParams['search']
@@ -98,6 +103,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         page: 0
       })
       .subscribe((res: HttpResponse<ICategory[]>) => this.displayCategories(res.body, res.headers));
+  }
+
+  loadRates() {
+    this.rateService.query().subscribe((res: HttpResponse<ICategory[]>) => this.displayRates(res.body, res.headers));
   }
 
   reset() {
@@ -195,5 +204,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   protected displayCategories(data: ICategory[], headers: HttpHeaders) {
     this.categories = data;
+  }
+  protected displayRates(data: IRate[], headers: HttpHeaders) {
+    this.rates = data;
   }
 }
