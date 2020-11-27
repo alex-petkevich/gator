@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadRates() {
-    this.rateService.query().subscribe((res: HttpResponse<ICategory[]>) => this.displayRates(res.body, res.headers));
+    this.rateService.query().subscribe((res: HttpResponse<IRate[]>) => this.displayRates(res.body, res.headers));
   }
 
   reset() {
@@ -115,13 +115,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page) {
-    this.loadAll();
     this.loadCats();
+    this.loadRates();
+    this.loadAll();
   }
 
   ngOnInit() {
-    this.loadAll();
     this.loadCats();
+    this.loadRates();
+    this.loadAll();
     this.accountService.identity().then((account: Account) => {
       this.account = account;
     });
@@ -192,6 +194,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   showHideFilters() {
     this.isHidden = !this.isHidden;
+  }
+
+  calcRates() {
+    let t = 1;
   }
 
   protected displayItems(data: IItem[], headers: HttpHeaders) {

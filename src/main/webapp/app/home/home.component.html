@@ -46,7 +46,7 @@
 
             <div class="input-group w-100 mt-3" *ngIf="rates?.length > 0">
                 {{ 'gatorApp.item.home.showRate' | translate }}: &nbsp;&nbsp;&nbsp;
-                <div class="rate" *ngFor="let rate of rates;"><input type="checkbox" name="currency" value="{{rate.code}}">{{rate.code}}</div>
+                <div class="rate" *ngFor="let rate of rates;"><input type="checkbox" name="currency" id="rate{{rate.code}}" value="{{rate.code}}" (click)="calcRates()"><label for="rate{{rate.code}}">{{rate.code}}</label></div>
             </div>
 
         </form>
