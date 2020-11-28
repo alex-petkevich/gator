@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories: ICategory[];
   interval: NodeJS.Timeout;
   isHidden: boolean;
-  private rates: IRate[];
+  rates: IRate[];
   currencies: any[];
 
   constructor(
