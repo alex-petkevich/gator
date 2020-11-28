@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category/category.service';
 import { RateService } from 'app/entities/rate/rate.service';
-import { IRate } from 'app/shared/model/rate.model';
+import { IRate, Rate } from 'app/shared/model/rate.model';
 
 @Component({
   selector: 'jhi-home',
@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   interval: NodeJS.Timeout;
   isHidden: boolean;
   private rates: IRate[];
+  currencies: any[];
 
   constructor(
     private accountService: AccountService,
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.searchCategory = '0';
     this.searchType = undefined;
     this.isHidden = true;
+    this.currencies = [];
   }
 
   loadAll() {
@@ -196,8 +198,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isHidden = !this.isHidden;
   }
 
-  calcRates() {
-    let t = 1;
+  calcRates(code, state) {
+    if (state === true) this.currencies.push(code);
+    else {
+      const fnd = this.currencies.indexOf(code);
+      if (fnd > -1) this.currencies.splice(fnd, 1);
+    }
   }
 
   protected displayItems(data: IItem[], headers: HttpHeaders) {
@@ -213,5 +219,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   protected displayRates(data: IRate[], headers: HttpHeaders) {
     this.rates = data;
+  }
+
+  convertPrice(price: number, rate: any) {
+    let currency = new Rate();
+
+    this.rates.forEach(rateVal => {
+      if (rateVal.code === rate) currency = rateVal;
+    });
+
+    return (price / currency.rate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ') + ' ' + currency.mark;
   }
 }

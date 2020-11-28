@@ -46,7 +46,10 @@
 
             <div class="input-group w-100 mt-3" *ngIf="rates?.length > 0">
                 {{ 'gatorApp.item.home.showRate' | translate }}: &nbsp;&nbsp;&nbsp;
-                <div class="rate" *ngFor="let rate of rates;"><input type="checkbox" name="currency" id="rate{{rate.code}}" value="{{rate.code}}" (click)="calcRates()"><label for="rate{{rate.code}}">{{rate.code}}</label></div>
+                <div class="rate" *ngFor="let rate of rates;let i=index;">
+                    <input type="checkbox" name="currency" id="rate{{rate.code}}" class="rates" (change)="calcRates(rate.code, $event.target.checked);" value="{{rate.code}}" >
+                    <label for="rate{{rate.code}}">{{rate.code}}</label>
+                </div>
             </div>
 
         </form>
@@ -74,7 +77,11 @@
                         <div class="lbl rent"*ngIf="item?.type == '4'">{{ 'gatorApp.item.home.rent' | translate }}</div>
                         <div class="lbl important"*ngIf="item?.type == '5'">important</div>
                         <div class="lbl xclosed"*ngIf="item?.type == '6'">closed</div>
-                        <a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a> <div class="price" *ngIf="item?.price != null">({{item.price}} p.)</div> <div class="date">- {{item.updatedAt | date:'dd.MM.yyyy HH:mm'}} </div> <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div></td>
+                        <a href="{{item.link}}" ngbTooltip="{{item.description}}">{{item.title}}</a>
+                        <div class="price" *ngIf="item?.price != null">({{item.price}} p. <span *ngFor="let rate of currencies;"> | {{convertPrice(item.price, rate)}}</span> )</div>
+                        <div class="date">- {{item.updatedAt | date:'dd.MM.yyyy HH:mm'}} </div>
+                        <div class="dir" *ngIf="item?.categoryName != ''"> / {{item.categoryName}}</div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
