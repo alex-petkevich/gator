@@ -229,9 +229,11 @@ input[type='checkbox'] {
 }
 .rate {
   display: inline;
-  padding-left: 5px;
 }
 
 .rate > label {
   display: inline;
+}
+.rate > input[type='checkbox'] {
+  width: 20px;
 }

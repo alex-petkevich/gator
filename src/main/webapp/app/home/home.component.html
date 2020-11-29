@@ -5,17 +5,15 @@
     <div class="col-sm-12">
         <form name="searchForm" class="form-inline">
             <div class="input-group w-100 mt-3">
-                <label for="searchCategory">{{ 'gatorApp.item.home.searchCategory' | translate }}:</label> &nbsp;&nbsp;&nbsp;
                 <select name="searchCategory" class="form-control" id="searchCategory" [(ngModel)]="searchCategory" (change)="loadAll()">
-                    <option value="0"></option>
+                    <option value="0">{{ 'gatorApp.item.home.searchCategory' | translate }}</option>
                     <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
                 </select>
             </div>
 
             <div class="input-group w-100 mt-3">
-                <label for="searchType">{{ 'gatorApp.item.home.searchType' | translate }}:</label> &nbsp;&nbsp;&nbsp;
                 <select name="searchType" class="form-control" id="searchType" [(ngModel)]="searchType"  (change)="loadAll()">
-                    <option></option>
+                    <option value="undefined">{{ 'gatorApp.item.home.searchType' | translate }}</option>
                     <option value="0">{{ 'gatorApp.item.home.buy' | translate }}</option>
                     <option value="1">{{ 'gatorApp.item.home.sell' | translate }}</option>
                     <option value="2">{{ 'gatorApp.item.home.change' | translate }}</option>
@@ -23,14 +21,13 @@
                     <option value="4">{{ 'gatorApp.item.home.rent' | translate }}</option>
                 </select>
                 &nbsp;
-                <label for="searchTimeToRefresh">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}:</label> &nbsp;&nbsp;&nbsp;
                 <select name="searchTimeToRefresh" class="form-control" id="searchTimeToRefresh" [(ngModel)]="searchTimeToRefresh"  (change)="refreshContent()">
-                    <option value="3">3</option>
-                    <option value="6">6</option>
-                    <option value="10">10</option>
-                    <option value="30">30</option>
-                    <option value="60">60</option>
-                    <option value="1000">1000</option>
+                    <option value="3">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 3</option>
+                    <option value="6">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 6</option>
+                    <option value="10">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 10</option>
+                    <option value="30">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 30</option>
+                    <option value="60">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 60</option>
+                    <option value="1000">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 1000</option>
                 </select>
             </div>
 
@@ -45,7 +42,7 @@
             </div>
 
             <div class="input-group w-100 mt-3" *ngIf="rates?.length > 0">
-                {{ 'gatorApp.item.home.showRate' | translate }}: &nbsp;&nbsp;&nbsp;
+                {{ 'gatorApp.item.home.showRate' | translate }}:&nbsp;
                 <div class="rate" *ngFor="let rate of rates;let i=index;">
                     <input type="checkbox" name="currency" id="rate{{rate.code}}" (change)="calcRates(rate.code, $event.target.checked);" [checked]="currencies.indexOf(rate?.code) > -1" value="{{rate.code}}" >
                     <label for="rate{{rate.code}}">{{rate.code}}</label>
