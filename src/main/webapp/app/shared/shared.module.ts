@@ -5,6 +5,8 @@ import { JhiAlertComponent } from './alert/alert.component';
 import { JhiAlertErrorComponent } from './alert/alert-error.component';
 import { JhiLoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [GatorSharedLibsModule],
@@ -16,7 +18,9 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
     JhiAlertComponent,
     JhiAlertErrorComponent,
     JhiLoginModalComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    NgSelectModule,
+    FormsModule
   ]
 })
 export class GatorSharedModule {}

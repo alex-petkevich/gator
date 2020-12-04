@@ -5,30 +5,49 @@
     <div class="col-sm-12">
         <form name="searchForm" class="form-inline">
             <div class="input-group w-100 mt-3">
-                <select name="searchCategory" class="form-control" id="searchCategory" [(ngModel)]="searchCategory" (change)="loadAll()">
-                    <option value="0">{{ 'gatorApp.item.home.searchCategory' | translate }}</option>
-                    <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-                </select>
+                <ng-select [multiple]="true"
+                           [(ngModel)]="searchCategory"
+                           (change)="loadAll()"
+                           name="searchCategory"
+                           id="searchCategory"
+                           placeholder="{{ 'gatorApp.item.home.searchCategory' | translate }}"
+                           searchable="true"
+                           clearable="true"
+                >
+                    <ng-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ng-option>
+                </ng-select>
             </div>
 
             <div class="input-group w-100 mt-3">
-                <select name="searchType" class="form-control" id="searchType" [(ngModel)]="searchType"  (change)="loadAll()">
-                    <option value="undefined">{{ 'gatorApp.item.home.searchType' | translate }}</option>
-                    <option value="0">{{ 'gatorApp.item.home.buy' | translate }}</option>
-                    <option value="1">{{ 'gatorApp.item.home.sell' | translate }}</option>
-                    <option value="2">{{ 'gatorApp.item.home.change' | translate }}</option>
-                    <option value="3">{{ 'gatorApp.item.home.service' | translate }}</option>
-                    <option value="4">{{ 'gatorApp.item.home.rent' | translate }}</option>
-                </select>
-                &nbsp;
-                <select name="searchTimeToRefresh" class="form-control" id="searchTimeToRefresh" [(ngModel)]="searchTimeToRefresh"  (change)="refreshContent()">
-                    <option value="3">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 3</option>
-                    <option value="6">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 6</option>
-                    <option value="10">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 10</option>
-                    <option value="30">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 30</option>
-                    <option value="60">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 60</option>
-                    <option value="1000">{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}: 1000</option>
-                </select>
+
+                <ng-select [multiple]="true"
+                           [(ngModel)]="searchType"
+                           (change)="loadAll()"
+                           name="searchType"
+                           id="searchType"
+                           placeholder="{{ 'gatorApp.item.home.searchType' | translate }}"
+                >
+                    <ng-option value="0">{{ 'gatorApp.item.home.buy' | translate }}</ng-option>
+                    <ng-option value="1">{{ 'gatorApp.item.home.sell' | translate }}</ng-option>
+                    <ng-option value="2">{{ 'gatorApp.item.home.change' | translate }}</ng-option>
+                    <ng-option value="3">{{ 'gatorApp.item.home.service' | translate }}</ng-option>
+                    <ng-option value="4">{{ 'gatorApp.item.home.rent' | translate }}</ng-option>
+                </ng-select>
+
+                <ng-select [multiple]="false"
+                           [(ngModel)]="searchTimeToRefresh"
+                           (change)="loadAll()"
+                           name="searchTimeToRefresh"
+                           id="searchTimeToRefresh"
+                           placeholder="{{ 'gatorApp.item.home.searchTimeToRefresh' | translate }}"
+                >
+                    <ng-option value="3">3</ng-option>
+                    <ng-option value="6">6</ng-option>
+                    <ng-option value="10">10</ng-option>
+                    <ng-option value="30">30</ng-option>
+                    <ng-option value="60">60</ng-option>
+                    <ng-option value="1000">1000</ng-option>
+                </ng-select>
             </div>
 
             <div class="input-group w-100 mt-3">

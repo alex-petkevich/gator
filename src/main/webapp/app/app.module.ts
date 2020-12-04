@@ -19,6 +19,8 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { NgSelectConfig } from '@ng-select/ng-select';
+import { ɵs } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -47,7 +49,9 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
       provide: HTTP_INTERCEPTORS,
       useClass: NotificationInterceptor,
       multi: true
-    }
+    },
+    NgSelectConfig,
+    ɵs
   ],
   bootstrap: [JhiMainComponent]
 })

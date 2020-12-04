@@ -2,6 +2,7 @@
 @import '~bootstrap/scss/functions';
 @import '~bootswatch/dist/flatly/variables';
 @import '~bootstrap/scss/variables';
+@import '~@ng-select/ng-select/themes/material.theme.css';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -236,4 +237,10 @@ input[type='checkbox'] {
 }
 .rate > input[type='checkbox'] {
   width: 20px;
+}
+#searchCategory {
+  min-width: 400px;
+}
+#searchTimeToRefresh {
+  min-width: 100px;
 }
