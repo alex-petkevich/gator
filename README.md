@@ -1,6 +1,6 @@
 # gator
 
-This application was generated using JHipster 6.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.3.1](https://www.jhipster.tech/documentation-archive/v6.3.1).
+Application to parse different classifieds boards. Easily customizable (just create your own by.homesite.parser implementation)
 
 ## Development
 
@@ -67,10 +67,6 @@ Edit [src/main/webapp/content/css/vendor.css](src/main/webapp/content/css/vendor
 ```
 @import '~leaflet/dist/leaflet.css';
 ```
-
-Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
 ### Using Angular CLI
 
