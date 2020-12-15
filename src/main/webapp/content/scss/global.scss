@@ -244,3 +244,27 @@ input[type='checkbox'] {
 #searchTimeToRefresh {
   min-width: 100px;
 }
+
+.adrow > a {
+  color: #2b6ea1;
+}
+
+a,
+a:hover,
+a:visited,
+a > span {
+  color: #2b6ea1;
+}
+
+.bg-primary {
+  background-color: #e5e0c6 !important;
+}
+input[type='radio'],
+input[type='checkbox'] {
+  width: auto;
+  height: auto;
+  padding: 5px;
+}
+body {
+  font-family: inherit;
+}
