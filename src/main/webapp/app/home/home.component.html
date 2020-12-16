@@ -85,7 +85,7 @@
                 <tr *ngFor="let item of items ;trackBy: trackId">
                     <td width="50" *ngIf="item?.image != null">
                         <img src="{{item.image}}" /></td>
-                    <td class="adrow">
+                    <td>
                         <div class="lbl sell"*ngIf="item?.type == '1'">{{ 'gatorApp.item.home.sell' | translate }}</div>
                         <div class="lbl buy"*ngIf="item?.type == '0'">{{ 'gatorApp.item.home.buy' | translate }}</div>
                         <div class="lbl change"*ngIf="item?.type == '2'">{{ 'gatorApp.item.home.change' | translate }}</div>
