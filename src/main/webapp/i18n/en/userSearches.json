@@ -1,0 +1,17 @@
+{
+  "gatorApp": {
+    "userSearches": {
+      "home": {
+        "title": "User Searches",
+        "notFound": "No User Searches found"
+      },
+      "created": "New User Searches created with param {{ param }}",
+      "deleted": "User Searches deleted {{ param }}",
+      "delete": {
+        "question": "Are you sure that you want to delete User Search {{ id }}?"
+      },
+      "name": "Name",
+      "user": "User"
+    }
+  }
+}

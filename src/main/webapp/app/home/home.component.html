@@ -55,6 +55,9 @@
                 <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                     <fa-icon [icon]="'search'"></fa-icon>
                 </button>
+                <button class="input-group-append btn btn-success" (click)="saveUserSearch()"  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                    <fa-icon [icon]="'save'"></fa-icon>
+                </button>
                 <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                     <fa-icon [icon]="'trash-alt'"></fa-icon>
                 </button>

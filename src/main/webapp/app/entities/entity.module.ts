@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { GatorUserSearchesModule } from 'app/entities/user-searches/user-searches.module';
 
 @NgModule({
   imports: [
+    GatorUserSearchesModule,
     RouterModule.forChild([
       {
         path: 'item',
@@ -21,11 +23,18 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./user-properties/user-properties.module').then(m => m.GatorUserPropertiesModule)
       },
       {
+        path: 'user-searches',
+        loadChildren: () => import('./user-searches/user-searches.module').then(m => m.GatorUserSearchesModule)
+      },
+      {
         path: 'properties',
         loadChildren: () => import('./properties/properties.module').then(m => m.GatorPropertiesModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
-  ]
+  ],
+  declarations: [],
+  entryComponents: [],
+  exports: []
 })
 export class GatorEntityModule {}

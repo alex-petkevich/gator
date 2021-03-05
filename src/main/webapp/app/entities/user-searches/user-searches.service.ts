@@ -10,17 +10,17 @@ type EntityResponseType = HttpResponse<IUserSearches>;
 type EntityArrayResponseType = HttpResponse<IUserSearches[]>;
 
 @Injectable({ providedIn: 'root' })
-export class RateService {
+export class UserSearchesService {
   public resourceUrl = SERVER_API_URL + 'api/user-searches';
 
   constructor(protected http: HttpClient) {}
 
-  create(rate: IUserSearches): Observable<EntityResponseType> {
-    return this.http.post<IUserSearches>(this.resourceUrl, rate, { observe: 'response' });
+  create(search: IUserSearches): Observable<EntityResponseType> {
+    return this.http.post<IUserSearches>(this.resourceUrl, search, { observe: 'response' });
   }
 
-  update(rate: IUserSearches): Observable<EntityResponseType> {
-    return this.http.put<IUserSearches>(this.resourceUrl, rate, { observe: 'response' });
+  update(search: IUserSearches): Observable<EntityResponseType> {
+    return this.http.put<IUserSearches>(this.resourceUrl, search, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

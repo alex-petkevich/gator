@@ -129,6 +129,8 @@
   },
   "error": {
     "internalServerError": "Внутренняя ошибка сервера",
+    "nameexists": "Такое имя уже существует",
+    "loginrequired": "Требуется авторизация",
     "server.not.reachable": "Сервер не доступен",
     "url.not.found": "Не найдено",
     "NotNull": "Поле {{fieldName}} не может быть пустым!",

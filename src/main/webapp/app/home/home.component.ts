@@ -17,6 +17,7 @@ import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category/category.service';
 import { RateService } from 'app/entities/rate/rate.service';
 import { IRate, Rate } from 'app/shared/model/rate.model';
+import { UserSearchesModalService } from 'app/entities/user-searches/user-searches-modal.service';
 
 @Component({
   selector: 'jhi-home',
@@ -49,7 +50,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private rateService: RateService,
     protected jhiAlertService: JhiAlertService,
     protected activatedRoute: ActivatedRoute,
-    private eventManager: JhiEventManager
+    private eventManager: JhiEventManager,
+    private userSearchesModalService: UserSearchesModalService
   ) {
     this.items = [];
     this.predicate = 'id';
@@ -187,6 +189,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
+  save(query) {}
+
   refreshContent() {
     if (this.interval) clearInterval(this.interval);
     this.interval = setInterval(() => {
@@ -229,5 +233,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     return (price / currency.rate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ') + ' ' + currency.mark;
+  }
+
+  saveUserSearch() {
+    this.userSearchesModalService.open();
   }
 }
