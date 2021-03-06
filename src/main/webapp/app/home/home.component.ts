@@ -262,12 +262,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadSavedSearch() {
-    if (this.savedUserSearch === null || this.savedUserSearch === undefined) {
+    if (this.savedUserSearch === null || this.savedUserSearch === undefined || this.savedUserSearch === '') {
       this.currencies = [];
       this.searchType = 0;
       this.currentSearch = '';
       this.searchTimeToRefresh = 6;
       this.searchCategory = '';
+      this.loadAll();
       return;
     }
 
@@ -275,12 +276,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.currencies = filter['currencies'];
     this.searchType = filter['searchType'];
     this.currentSearch = filter['currentSearch'];
-    this.searchTimeToRefresh = filter['searchTimeToRefresh'];
+    this.searchTimeToRefresh = filter['searchTimeToRefresh'] === null ? 6 : filter['searchTimeToRefresh'];
     this.searchCategory = filter['searchCategory'];
     this.loadAll();
   }
 
   private registerUserSearchChange() {
     this.userSearchesSubscription = this.eventManager.subscribe('userSearchListModification', response => this.loadUserSearches());
+  }
+
+  deleteUserSearch() {
+    this.userSearceshService.delete(Number(this.savedUserSearch)).subscribe(response => {
+      this.savedUserSearch = '';
+      this.loadSavedSearch();
+      this.loadUserSearches();
+    });
   }
 }
