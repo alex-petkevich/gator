@@ -18,6 +18,12 @@ export class UserSearchesComponent {
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(254)]]
   });
 
+  searchCategory: String;
+  searchType: number;
+  searchTimeToRefresh: number;
+  currentSearch: String;
+  currencies: any[];
+
   constructor(
     protected userSearchesService: UserSearchesService,
     public activeModal: NgbActiveModal,
@@ -44,7 +50,13 @@ export class UserSearchesComponent {
     return {
       ...new UserSearches(),
       name: this.userSearchForm.get(['name']).value,
-      payload: JSON.stringify({ type: 'test', name: 'test2' })
+      payload: JSON.stringify({
+        searchCategory: this.searchCategory,
+        searchType: this.searchType,
+        searchTimeToRefresh: this.searchTimeToRefresh,
+        currentSearch: this.currentSearch,
+        currencies: this.currencies
+      })
     };
   }
 }

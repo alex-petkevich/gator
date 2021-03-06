@@ -71,6 +71,18 @@
                 </div>
             </div>
 
+            <div class="input-group w-100 mt-3" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                <ng-select (change)="loadSavedSearch()"
+                           name="savedUserSearch"
+                           id="savedUserSearch"
+                           [(ngModel)]="savedUserSearch"
+                           placeholder="{{ 'gatorApp.item.home.savedUserSearch' | translate }}"
+                           [multiple]="false"
+                           style="width: 200px"
+                >
+                    <ng-option *ngFor="let search of userSearches" [value]="search.id">{{search.name}}</ng-option>
+                </ng-select>
+            </div>
         </form>
     </div>
 </div>

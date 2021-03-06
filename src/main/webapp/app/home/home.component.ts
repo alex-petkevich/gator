@@ -18,6 +18,8 @@ import { CategoryService } from 'app/entities/category/category.service';
 import { RateService } from 'app/entities/rate/rate.service';
 import { IRate, Rate } from 'app/shared/model/rate.model';
 import { UserSearchesModalService } from 'app/entities/user-searches/user-searches-modal.service';
+import { IUserSearches } from 'app/shared/model/user-searches.model';
+import { UserSearchesService } from 'app/entities/user-searches/user-searches.service';
 
 @Component({
   selector: 'jhi-home',
@@ -28,6 +30,7 @@ import { UserSearchesModalService } from 'app/entities/user-searches/user-search
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account;
   authSubscription: Subscription;
+  userSearchesSubscription: Subscription;
   modalRef: NgbModalRef;
   items: IItem[];
   predicate: any;
@@ -41,6 +44,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   isHidden: boolean;
   rates: IRate[];
   currencies: any[];
+  userSearches: IUserSearches[];
+  savedUserSearch: string;
 
   constructor(
     private accountService: AccountService,
@@ -51,7 +56,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     protected jhiAlertService: JhiAlertService,
     protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager,
-    private userSearchesModalService: UserSearchesModalService
+    private userSearchesModalService: UserSearchesModalService,
+    private userSearceshService: UserSearchesService
   ) {
     this.items = [];
     this.predicate = 'id';
@@ -66,6 +72,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.searchType = undefined;
     this.isHidden = true;
     this.currencies = [];
+    this.userSearches = [];
+    this.savedUserSearch = '';
   }
 
   loadAll() {
@@ -113,6 +121,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.rateService.query().subscribe((res: HttpResponse<IRate[]>) => this.displayRates(res.body, res.headers));
   }
 
+  loadUserSearches() {
+    this.userSearceshService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
+  }
+
   reset() {
     this.items = [];
     this.loadAll();
@@ -121,18 +133,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadPage(page) {
     this.loadCats();
     this.loadRates();
+    this.loadUserSearches();
     this.loadAll();
   }
 
   ngOnInit() {
     this.loadCats();
     this.loadRates();
+    this.loadUserSearches();
     this.loadAll();
     this.accountService.identity().then((account: Account) => {
       this.account = account;
     });
     this.registerAuthenticationSuccess();
     this.registerChangeInItems();
+    this.registerUserSearchChange();
     this.refreshContent();
   }
 
@@ -159,6 +174,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.authSubscription) {
       this.eventManager.destroy(this.authSubscription);
+    }
+    if (this.userSearchesSubscription) {
+      this.eventManager.destroy(this.userSearchesSubscription);
     }
     this.eventManager.destroy(this.eventSubscriber);
   }
@@ -225,6 +243,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.rates = data;
   }
 
+  private displayUserSearches(body: IUserSearches[], headers: HttpHeaders) {
+    this.userSearches = body;
+  }
+
   convertPrice(price: number, rate: any) {
     let currency = new Rate();
 
@@ -236,6 +258,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   saveUserSearch() {
-    this.userSearchesModalService.open();
+    this.userSearchesModalService.open(this.searchCategory, this.searchType, this.searchTimeToRefresh, this.currentSearch, this.currencies);
+  }
+
+  loadSavedSearch() {
+    if (this.savedUserSearch === null || this.savedUserSearch === undefined) {
+      this.currencies = [];
+      this.searchType = 0;
+      this.currentSearch = '';
+      this.searchTimeToRefresh = 6;
+      this.searchCategory = '';
+      return;
+    }
+
+    const filter = JSON.parse(this.userSearches.find(search => search.id === Number(this.savedUserSearch)).payload);
+    this.currencies = filter['currencies'];
+    this.searchType = filter['searchType'];
+    this.currentSearch = filter['currentSearch'];
+    this.searchTimeToRefresh = filter['searchTimeToRefresh'];
+    this.searchCategory = filter['searchCategory'];
+    this.loadAll();
+  }
+
+  private registerUserSearchChange() {
+    this.userSearchesSubscription = this.eventManager.subscribe('userSearchListModification', response => this.loadUserSearches());
   }
 }
