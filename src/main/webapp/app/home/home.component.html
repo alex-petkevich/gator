@@ -78,6 +78,7 @@
                            [(ngModel)]="savedUserSearch"
                            placeholder="{{ 'gatorApp.item.home.savedUserSearch' | translate }}"
                            [multiple]="false"
+                           [searchable]="false"
                            style="width: 200px"
                 >
                     <ng-option *ngFor="let search of userSearches" [value]="search.id">{{search.name}}</ng-option>
