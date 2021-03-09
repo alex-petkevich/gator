@@ -122,7 +122,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadUserSearches() {
-    if (this.accountService.hasAnyAuthority(['ROLE_USER', 'ROLE_ADMIN']))
+    if (this.isAuthenticated())
       this.userSearceshService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
   }
 
@@ -141,10 +141,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadCats();
     this.loadRates();
-    this.loadUserSearches();
     this.loadAll();
     this.accountService.identity().then((account: Account) => {
       this.account = account;
+      this.loadUserSearches();
     });
     this.registerAuthenticationSuccess();
     this.registerChangeInItems();
@@ -156,6 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authSubscription = this.eventManager.subscribe('authenticationSuccess', message => {
       this.accountService.identity().then(account => {
         this.account = account;
+        this.loadUserSearches();
       });
     });
   }
