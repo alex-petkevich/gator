@@ -122,7 +122,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadUserSearches() {
-    this.userSearceshService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
+    if (this.accountService.hasAnyAuthority(['ROLE_USER', 'ROLE_ADMIN']))
+      this.userSearceshService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
   }
 
   reset() {
