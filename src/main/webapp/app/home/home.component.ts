@@ -20,6 +20,8 @@ import { IRate, Rate } from 'app/shared/model/rate.model';
 import { UserSearchesModalService } from 'app/entities/user-searches/user-searches-modal.service';
 import { IUserSearches } from 'app/shared/model/user-searches.model';
 import { UserSearchesService } from 'app/entities/user-searches/user-searches.service';
+import { ConfirmationDialogService } from 'app/shared/confirm/confirmation-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'jhi-home',
@@ -57,7 +59,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager,
     private userSearchesModalService: UserSearchesModalService,
-    private userSearceshService: UserSearchesService
+    private userSearceshService: UserSearchesService,
+    private confirmationDialogService: ConfirmationDialogService,
+    private translate: TranslateService
   ) {
     this.items = [];
     this.predicate = 'id';
@@ -293,5 +297,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.loadSavedSearch();
       this.loadUserSearches();
     });
+  }
+
+  createSearchNotification() {
+    this.confirmationDialogService
+      .confirm(this.translate.instant('gatorApp.item.home.createAlertTitle'), this.translate.instant('gatorApp.item.home.createAlertText'))
+      .then(confirmed => {})
+      .catch(() => {});
   }
 }

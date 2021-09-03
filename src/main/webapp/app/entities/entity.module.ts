@@ -29,6 +29,10 @@ import { GatorUserSearchesModule } from 'app/entities/user-searches/user-searche
       {
         path: 'properties',
         loadChildren: () => import('./properties/properties.module').then(m => m.GatorPropertiesModule)
+      },
+      {
+        path: 'notifications',
+        loadChildren: () => import('./notifications/notifications.module').then(m => m.GatorNotificationsModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

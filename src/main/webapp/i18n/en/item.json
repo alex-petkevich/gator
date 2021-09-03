@@ -16,7 +16,12 @@
         "service": "Service",
         "rent": "Rent",
         "showRate": "Convert price to",
-        "savedUserSearch": "Saved filter"
+        "savedUserSearch": "Saved filter",
+        "deleteUserFilter": "Delete saved filter",
+        "createAlert": "Create a notification for the filter",
+        "clear": "Clear",
+        "save": "Save filter",
+        "apply": "Apply"
       },
       "created": "A new Item is created with identifier {{ param }}",
       "updated": "A Item is updated with identifier {{ param }}",

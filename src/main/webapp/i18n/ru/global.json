@@ -11,6 +11,7 @@
         "category": "Категории",
         "properties": "Пользовательские настройки",
         "site": "Сайты",
+        "notifications": "Уведомления",
         "userProperties": "Настройки пользователя",
         "userSites": "Сайты пользователя",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
@@ -139,6 +140,10 @@
     "emailexists": "Эл. почта уже используется!!",
     "idexists": "Новый {{entityName}} не может иметь данный ID",
     "idnull": "Неверный ID"
+  },
+  "confirmation": {
+    "ok": "OK",
+    "cancel": "Отмена"
   },
   "footer": "developed by <a href='http://homesite.by'>http://homesite.by</a> (c)"
 }

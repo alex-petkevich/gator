@@ -1,0 +1,29 @@
+{
+  "gatorApp": {
+    "notifications": {
+      "home": {
+        "title": "Notification types",
+        "createLabel": "Create new notification type",
+        "createOrEditLabel": "Create or edit new notification type",
+        "notFound": "Notifications not found"
+      },
+      "created": "New notification type created {{ param }}",
+      "updated": "Notification type updated {{ param }}",
+      "deleted": "Notification type deleted {{ param }}",
+      "delete": {
+        "question": "Are you sure that want to delete notification type {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification types"
+      },
+      "name": "Name",
+      "title": "Title",
+      "isActive": "Is active"
+    },
+    "notification": {
+      "created": "New notification type created {{ param }}",
+      "updated": "Notification type updated {{ param }}",
+      "deleted": "Notification type deleted {{ param }}"
+    }
+  }
+}

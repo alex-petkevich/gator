@@ -7,11 +7,19 @@ import { JhiLoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationDialogComponent } from './confirm/confirmation-dialog.component';
 
 @NgModule({
   imports: [GatorSharedLibsModule],
-  declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent, JhiLoginModalComponent, HasAnyAuthorityDirective],
-  entryComponents: [JhiLoginModalComponent],
+  declarations: [
+    FindLanguageFromKeyPipe,
+    JhiAlertComponent,
+    JhiAlertErrorComponent,
+    JhiLoginModalComponent,
+    HasAnyAuthorityDirective,
+    ConfirmationDialogComponent
+  ],
+  entryComponents: [JhiLoginModalComponent, ConfirmationDialogComponent],
   exports: [
     GatorSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -20,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     JhiLoginModalComponent,
     HasAnyAuthorityDirective,
     NgSelectModule,
+    ConfirmationDialogComponent,
     FormsModule
   ]
 })

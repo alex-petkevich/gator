@@ -141,5 +141,9 @@
     "idexists": "A new {{ entityName }} cannot already have an ID",
     "idnull": "Invalid ID"
   },
+  "confirmation": {
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
   "footer": "developed by <a href='http://homesite.by'>http://homesite.by</a> (c)"
 }
