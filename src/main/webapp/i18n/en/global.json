@@ -20,6 +20,7 @@
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
+        "user-notifications": "Notifications",
         "login": "Sign in",
         "logout": "Sign out",
         "register": "Register"
@@ -143,7 +144,8 @@
   },
   "confirmation": {
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "title": "Warning"
   },
   "footer": "developed by <a href='http://homesite.by'>http://homesite.by</a> (c)"
 }

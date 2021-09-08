@@ -19,6 +19,7 @@
       "account": {
         "main": "Профиль",
         "settings": "Настройки",
+        "user-notifications": "Уведомления",
         "password": "Пароль",
         "sessions": "Сессии",
         "login": "Войти",
@@ -143,7 +144,8 @@
   },
   "confirmation": {
     "ok": "OK",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "title": "Внимание"
   },
   "footer": "developed by <a href='http://homesite.by'>http://homesite.by</a> (c)"
 }

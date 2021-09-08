@@ -2,26 +2,30 @@ import { Moment } from 'moment';
 
 export interface IUserNotifications {
   id?: number;
-  value?: string;
+  contact?: string;
   userLogin?: string;
   userId?: number;
   isActive?: boolean;
-  last_sent?: Moment;
-  total_qty?: number;
+  lastSent?: Moment;
+  totalQty?: number;
+  notificationName?: string;
   notificationId?: number;
+  userSearchesName?: string;
   userSearchesId?: number;
 }
 
 export class UserNotifications implements IUserNotifications {
   constructor(
     public id?: number,
-    public value?: string,
+    public contact?: string,
     public userLogin?: string,
     public userId?: number,
     public isActive?: boolean,
-    public last_sent?: Moment,
-    public total_qty?: number,
+    public lastSent?: Moment,
+    public totalQty?: number,
+    public notificationName?: string,
     public notificationId?: number,
+    public userSearchesName?: string,
     public userSearchesId?: number
   ) {
     this.isActive = this.isActive || false;

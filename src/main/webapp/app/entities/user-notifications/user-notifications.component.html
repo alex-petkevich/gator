@@ -1,0 +1,59 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gatorApp.userNotifications.home.title">User notifications</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="userNotifications?.length === 0">
+        <span jhiTranslate="gatorApp.userNotifications.home.notFound">No notifications found</span>
+    </div>
+    <div class="table-responsive" *ngIf="userNotifications?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="gatorApp.userNotifications.filter">Filter</span></th>
+            <th><span jhiTranslate="gatorApp.userNotifications.notification">Notification</span></th>
+            <th><span jhiTranslate="gatorApp.userNotifications.last_sent">Last sent</span></th>
+            <th><span jhiTranslate="gatorApp.userNotifications.total_qty">Total quantity</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let userNotifications of userNotifications ;trackBy: trackId">
+                <td><a [routerLink]="['/']" [queryParams]="{filter: userNotifications.userSearchesName}">{{userNotifications.id}}</a></td>
+                <td>
+                    {{userNotifications.userSearchesName}}
+                </td>
+                <td>
+                    {{userNotifications.notificationName}}
+                </td>
+                <td>
+                    {{userNotifications.lastSent}}
+                </td>
+                <td>
+                    {{userNotifications.totalQty}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/']" [queryParams]="{filter: userNotifications.userSearchesName}"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View current results</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/user-notifications', { outlets: { popup: userNotifications.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

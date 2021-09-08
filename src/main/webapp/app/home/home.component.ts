@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { IItem } from 'app/shared/model/item.model';
+import { IUserNotifications, UserNotifications } from 'app/shared/model/user-notifications.model';
 
 import { ITEMS_TO_DISPLAY } from 'app/shared/constants/pagination.constants';
 
@@ -20,7 +21,9 @@ import { IRate, Rate } from 'app/shared/model/rate.model';
 import { UserSearchesModalService } from 'app/entities/user-searches/user-searches-modal.service';
 import { IUserSearches } from 'app/shared/model/user-searches.model';
 import { UserSearchesService } from 'app/entities/user-searches/user-searches.service';
+import { UserNotificationsService } from 'app/entities/user-notifications/user-notifications.service';
 import { ConfirmationDialogService } from 'app/shared/confirm/confirmation-dialog.service';
+import { PopupDialogService } from 'app/shared/popup/popup-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -59,8 +62,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     private eventManager: JhiEventManager,
     private userSearchesModalService: UserSearchesModalService,
-    private userSearceshService: UserSearchesService,
+    private userSearchesService: UserSearchesService,
+    private userNotificationsService: UserNotificationsService,
     private confirmationDialogService: ConfirmationDialogService,
+    private popupDialogService: PopupDialogService,
     private translate: TranslateService
   ) {
     this.items = [];
@@ -74,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.searchTimeToRefresh = 6;
     this.searchCategory = '0';
     this.searchType = undefined;
-    this.isHidden = true;
+    this.isHidden = !(this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['filter']);
     this.currencies = [];
     this.userSearches = [];
     this.savedUserSearch = '';
@@ -127,7 +132,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadUserSearches() {
     if (this.isAuthenticated())
-      this.userSearceshService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
+      this.userSearchesService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
   }
 
   reset() {
@@ -251,6 +256,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private displayUserSearches(body: IUserSearches[], headers: HttpHeaders) {
     this.userSearches = body;
+    if (this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['filter']) {
+      // Does not work !!!
+      this.savedUserSearch = this.activatedRoute.snapshot.queryParams['filter'];
+      this.loadSavedSearch();
+    }
   }
 
   convertPrice(price: number, rate: any) {
@@ -292,7 +302,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   deleteUserSearch() {
-    this.userSearceshService.delete(Number(this.savedUserSearch)).subscribe(response => {
+    this.userSearchesService.delete(Number(this.savedUserSearch)).subscribe(response => {
       this.savedUserSearch = '';
       this.loadSavedSearch();
       this.loadUserSearches();
@@ -300,9 +310,28 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   createSearchNotification() {
+    if (!this.savedUserSearch) {
+      this.popupDialogService.popup(this.translate.instant('gatorApp.userNotifications.emptyFilterName'));
+      return;
+    }
     this.confirmationDialogService
       .confirm(this.translate.instant('gatorApp.item.home.createAlertTitle'), this.translate.instant('gatorApp.item.home.createAlertText'))
-      .then(confirmed => {})
-      .catch(() => {});
+      .then(confirmed => this.subscribeToNotificationSaveResponse(this.userNotificationsService.create(this.createNotificationsForm())));
+  }
+
+  private createNotificationsForm(): IUserNotifications {
+    return {
+      ...new UserNotifications(),
+      notificationName: 'email',
+      userSearchesId: Number(this.savedUserSearch),
+      isActive: true
+    };
+  }
+
+  private subscribeToNotificationSaveResponse(result: Observable<HttpResponse<IUserNotifications>>) {
+    result.subscribe(
+      () => this.popupDialogService.popup(this.translate.instant('gatorApp.userNotifications.created')),
+      () => this.popupDialogService.popup(this.translate.instant('gatorApp.userNotifications.notificationAlreadyExists'))
+    );
   }
 }

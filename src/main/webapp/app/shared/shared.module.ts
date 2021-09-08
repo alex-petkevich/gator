@@ -8,6 +8,7 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from './confirm/confirmation-dialog.component';
+import { PopupDialogComponent } from './popup/popup-dialog.component';
 
 @NgModule({
   imports: [GatorSharedLibsModule],
@@ -17,9 +18,10 @@ import { ConfirmationDialogComponent } from './confirm/confirmation-dialog.compo
     JhiAlertErrorComponent,
     JhiLoginModalComponent,
     HasAnyAuthorityDirective,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PopupDialogComponent
   ],
-  entryComponents: [JhiLoginModalComponent, ConfirmationDialogComponent],
+  entryComponents: [JhiLoginModalComponent, ConfirmationDialogComponent, PopupDialogComponent],
   exports: [
     GatorSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -29,6 +31,7 @@ import { ConfirmationDialogComponent } from './confirm/confirmation-dialog.compo
     HasAnyAuthorityDirective,
     NgSelectModule,
     ConfirmationDialogComponent,
+    PopupDialogComponent,
     FormsModule
   ]
 })
