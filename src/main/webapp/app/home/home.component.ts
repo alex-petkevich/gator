@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
@@ -96,10 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           size: ITEMS_TO_DISPLAY,
           sort: this.sort()
         })
-        .subscribe(
-          (res: HttpResponse<IItem[]>) => this.displayItems(res.body, res.headers),
-          (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        .subscribe((res: HttpResponse<IItem[]>) => this.displayItems(res.body), (res: HttpErrorResponse) => this.onError(res.message));
       return;
     }
     this.itemService
@@ -111,10 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         size: ITEMS_TO_DISPLAY,
         sort: this.sort()
       })
-      .subscribe(
-        (res: HttpResponse<IItem[]>) => this.displayItems(res.body, res.headers),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+      .subscribe((res: HttpResponse<IItem[]>) => this.displayItems(res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   loadCats() {
@@ -123,16 +117,16 @@ export class HomeComponent implements OnInit, OnDestroy {
         size: 1000,
         page: 0
       })
-      .subscribe((res: HttpResponse<ICategory[]>) => this.displayCategories(res.body, res.headers));
+      .subscribe((res: HttpResponse<ICategory[]>) => this.displayCategories(res.body));
   }
 
   loadRates() {
-    this.rateService.query().subscribe((res: HttpResponse<IRate[]>) => this.displayRates(res.body, res.headers));
+    this.rateService.query().subscribe((res: HttpResponse<IRate[]>) => this.displayRates(res.body));
   }
 
   loadUserSearches() {
     if (this.isAuthenticated())
-      this.userSearchesService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body, res.headers));
+      this.userSearchesService.query().subscribe((res: HttpResponse<IUserSearches[]>) => this.displayUserSearches(res.body));
   }
 
   reset() {
@@ -140,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
-  loadPage(page) {
+  loadPage() {
     this.loadCats();
     this.loadRates();
     this.loadUserSearches();
@@ -162,7 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   registerAuthenticationSuccess() {
-    this.authSubscription = this.eventManager.subscribe('authenticationSuccess', message => {
+    this.authSubscription = this.eventManager.subscribe('authenticationSuccess', () => {
       this.accountService.identity().then(account => {
         this.account = account;
         this.loadUserSearches();
@@ -193,12 +187,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInItems() {
-    this.eventSubscriber = this.eventManager.subscribe('itemListModification', response => this.reset());
+    this.eventSubscriber = this.eventManager.subscribe('itemListModification', () => this.reset());
   }
 
   sort() {
-    const result = ['updatedAt,desc'];
-    return result;
+    return ['updatedAt,desc'];
   }
 
   clear() {
@@ -218,7 +211,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
-  save(query) {}
+  save() {}
 
   refreshContent() {
     if (this.interval) clearInterval(this.interval);
@@ -239,7 +232,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected displayItems(data: IItem[], headers: HttpHeaders) {
+  protected displayItems(data: IItem[]) {
     this.items = data;
   }
 
@@ -247,19 +240,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  protected displayCategories(data: ICategory[], headers: HttpHeaders) {
+  protected displayCategories(data: ICategory[]) {
     this.categories = data;
   }
-  protected displayRates(data: IRate[], headers: HttpHeaders) {
+  protected displayRates(data: IRate[]) {
     this.rates = data;
   }
 
-  private displayUserSearches(body: IUserSearches[], headers: HttpHeaders) {
+  private displayUserSearches(body: IUserSearches[]) {
     this.userSearches = body;
+
     if (this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['filter']) {
-      // Does not work !!!
       this.savedUserSearch = this.activatedRoute.snapshot.queryParams['filter'];
+      const selectedFilter = this.userSearches.find(search => search.id === Number(this.savedUserSearch)).name;
       this.loadSavedSearch();
+      this.savedUserSearch = selectedFilter;
     }
   }
 
@@ -298,11 +293,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private registerUserSearchChange() {
-    this.userSearchesSubscription = this.eventManager.subscribe('userSearchListModification', response => this.loadUserSearches());
+    this.userSearchesSubscription = this.eventManager.subscribe('userSearchListModification', () => this.loadUserSearches());
   }
 
   deleteUserSearch() {
-    this.userSearchesService.delete(Number(this.savedUserSearch)).subscribe(response => {
+    this.userSearchesService.delete(Number(this.savedUserSearch)).subscribe(() => {
       this.savedUserSearch = '';
       this.loadSavedSearch();
       this.loadUserSearches();
@@ -316,7 +311,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.confirmationDialogService
       .confirm(this.translate.instant('gatorApp.item.home.createAlertTitle'), this.translate.instant('gatorApp.item.home.createAlertText'))
-      .then(confirmed => this.subscribeToNotificationSaveResponse(this.userNotificationsService.create(this.createNotificationsForm())));
+      .then(() => this.subscribeToNotificationSaveResponse(this.userNotificationsService.create(this.createNotificationsForm())));
   }
 
   private createNotificationsForm(): IUserNotifications {
