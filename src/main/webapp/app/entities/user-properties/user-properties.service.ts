@@ -20,7 +20,7 @@ export class UserPropertiesService {
   }
 
   update(userProperties: IUserProperties): Observable<EntityResponseType> {
-    return this.http.put<IUserProperties>(this.resourceUrl, userProperties, { observe: 'response' });
+    return this.http.put<IUserProperties>(`${this.resourceUrl}/${userProperties.id}`, userProperties, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

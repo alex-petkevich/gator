@@ -20,7 +20,7 @@ export class SiteService {
   }
 
   update(site: ISite): Observable<EntityResponseType> {
-    return this.http.put<ISite>(this.resourceUrl, site, { observe: 'response' });
+    return this.http.put<ISite>(`${this.resourceUrl}/${site.id}`, site, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
