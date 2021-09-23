@@ -1,6 +1,8 @@
-# gator
+# GATor (Global Ads aggregaTor)
 
 Application to parse different classifieds boards. Easily customizable (just create your own by.homesite.parser implementation)
+
+This this the frontend app (http://gator.homesite.by as a demo).
 
 ## Development
 
@@ -93,8 +95,6 @@ To ensure everything worked, run:
 
 Then navigate to [http://localhost:](http://localhost:) in your browser.
 
-Refer to [Using JHipster in production][] for more details.
-
 ### Packaging as war
 
 To package your application as a war in order to deploy it to an application server, run:
@@ -110,8 +110,6 @@ To launch your application's tests, run:
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
     npm test
-
-For more information, refer to the [Running tests page][].
 
 ### Code quality
 
@@ -146,20 +144,6 @@ Then run:
 
     docker-compose -f src/main/docker/app.yml up -d
 
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.3.1 archive]: https://www.jhipster.tech/documentation-archive/v6.3.1
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.3.1/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.3.1/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.3.1/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.3.1/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.3.1/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.3.1/setting-up-ci/
 [node.js]: https://nodejs.org/
 [yarn]: https://yarnpkg.org/
 [webpack]: https://webpack.github.io/
